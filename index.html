@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>ANcome VORTEX ROBOTICS</title>
+<style>
+:root{--bg:#05080d;--panel:rgba(255,255,255,.05);--line:rgba(120,220,255,.18);--tx:#e6f1f7;--mut:#8aa0ad;--ac:#38e1ff;--ac2:#7affb2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.6 "Segoe UI",system-ui,sans-serif}
+h1,h2,h3,.mono{font-family:"Courier New",ui-monospace,monospace;letter-spacing:.06em}
+a{color:inherit;text-decoration:none}
+nav{position:fixed;top:0;left:0;right:0;z-index:20;display:flex;align-items:center;justify-content:space-between;padding:12px 20px;padding-top:calc(12px + env(safe-area-inset-top,0px));background:rgba(5,8,13,.7);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+nav b{color:var(--ac)}
+nav .links{display:flex;gap:18px;font-size:14px}
+nav .links a:hover{color:var(--ac)}
+button{font:inherit;cursor:pointer}
+.btn{border:1px solid var(--ac);background:transparent;color:var(--ac);padding:10px 20px;border-radius:6px;transition:.2s}
+.btn:hover,.btn.p{background:var(--ac);color:#001018}
+#menu{display:none;background:none;border:1px solid var(--line);color:var(--tx);border-radius:6px;padding:6px 10px}
+#drawer{position:fixed;top:0;right:0;bottom:0;width:240px;background:#0a1118;border-left:1px solid var(--line);z-index:30;transform:translateX(100%);transition:.3s;padding:70px 24px;display:flex;flex-direction:column;gap:14px}
+#drawer.open{transform:none}
+@media(max-width:760px){nav .links{display:none}#menu{display:block}}
+#hero{position:relative;min-height:100vh;display:flex;align-items:center;padding:100px 6vw 60px;overflow:hidden}
+#hero canvas{position:absolute;inset:0;width:100%;height:100%}
+.hc{position:relative;z-index:2;max-width:640px}
+.hc h1{font-size:clamp(32px,6vw,64px);margin:0;line-height:1.1}
+.hc h1 span{color:var(--ac)}
+.tag{color:var(--ac2);font-size:14px}
+.cta{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+section{padding:80px 6vw;max-width:1200px;margin:auto}
+h2{font-size:clamp(22px,3.5vw,34px);margin:0 0 8px}
+h2::before{content:"// ";color:var(--ac)}
+.sub{color:var(--mut);max-width:680px;margin:0 0 32px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:20px;backdrop-filter:blur(8px);transition:transform .15s,border-color .2s,box-shadow .2s;transform-style:preserve-3d}
+.card:hover{border-color:var(--ac);box-shadow:0 0 24px rgba(56,225,255,.15)}
+.card h3{margin:0 0 6px;font-size:16px;color:var(--ac)}
+.card p,.card li{color:var(--mut);font-size:14px;margin:0}
+.card ul{padding-left:18px;margin:8px 0 0}
+.pipe{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.step{padding:10px 16px;border:1px solid var(--line);border-radius:999px;font-family:"Courier New",monospace;font-size:13px;opacity:0;transform:translateY(12px);transition:.5s}
+.pipe.in .step{opacity:1;transform:none;transition-delay:calc(var(--i)*120ms)}
+.trophy{text-align:center}
+.trophy .t{font-size:40px;filter:drop-shadow(0 0 12px rgba(255,200,60,.5))}
+.trophy:hover .t{animation:bob 1s infinite}
+@keyframes bob{50%{transform:translateY(-6px) rotate(8deg)}}
+.trophy .pos{color:var(--ac2);font-family:"Courier New",monospace}
+.badge{display:inline-block;font-size:11px;border:1px dashed var(--mut);color:var(--mut);padding:1px 8px;border-radius:99px;margin-top:8px}
+.ph{height:110px;border:1px dashed var(--line);border-radius:8px;display:grid;place-items:center;color:var(--mut);font-size:12px;margin-bottom:12px}
+.tags span{display:inline-block;font-size:11px;border:1px solid var(--line);border-radius:4px;padding:1px 7px;margin:2px 2px 0 0;color:var(--ac)}
+.note{font-size:12px;color:var(--mut);margin-top:16px}
+.reveal{opacity:0;transform:translateY(24px);transition:.7s}
+.reveal.in{opacity:1;transform:none}
+dialog{background:#0a1118;color:var(--tx);border:1px solid var(--ac);border-radius:12px;padding:24px;max-width:380px;width:90%}
+dialog::backdrop{background:rgba(0,0,0,.7)}
+textarea{width:100%;background:#05080d;color:var(--tx);border:1px solid var(--line);border-radius:6px;padding:8px;margin:10px 0;font:inherit}
+footer{border-top:1px solid var(--line);padding:40px 6vw;text-align:center;color:var(--mut);font-size:14px}
+footer .links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:14px 0}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#hero" class="mono"><b>AN</b>come VORTEX</a>
+  <div class="links"><a href="#about">About</a><a href="#projects">Projects</a><a href="#achievements">Achievements</a><a href="#team">Team</a><a href="#community">Community</a></div>
+  <div style="display:flex;gap:8px;align-items:center"><button class="btn" id="loginBtn">Login</button><button id="menu" aria-label="Menu">☰</button></div>
+</nav>
+<aside id="drawer" aria-label="Menu">
+  <a href="#about">About Us</a><a href="#domains">Domains</a><a href="#journey">Idea to Robot</a><a href="#projects">Projects</a><a href="#achievements">Achievements</a><a href="#competitions">Competitions</a><a href="#training">Training</a><a href="#team">Team</a><a href="#community">Community</a><a href="#next">The Next Vortex</a>
+</aside>
+
+<header id="hero">
+  <canvas id="c"></canvas>
+  <div class="hc">
+    <div class="tag mono">ROBOTICS • AI • IoT • CODING • INNOVATION</div>
+    <h1>ANcome <span>VORTEX</span> ROBOTICS</h1>
+    <p class="mono" style="color:var(--ac2)">Learn. Build. Compete. Innovate.</p>
+    <p style="color:var(--mut)">A student-led technology community building real-world robotics and technology projects at CSJMU, Kanpur.</p>
+    <div class="cta"><a class="btn p" href="#projects">Explore Projects</a><button class="btn" id="joinBtn">Join VORTEX</button><a class="btn" href="#team">Meet Our Team</a></div>
+  </div>
+</header>
+
+<section id="about" class="reveal">
+  <h2>ABOUT</h2>
+  <p class="sub">ANcome VORTEX ROBOTICS is a non-profit, student-led Robotics &amp; Technology Community associated with CSJMU, Kanpur. Its purpose: to help students learn technology through practical projects, hands-on experimentation, robotics competitions and innovation activities.</p>
+  <div class="grid">
+    <div class="card"><h3>CSE</h3><p>AI, ML, computer vision, robot software, web, automation, autonomous systems.</p></div>
+    <div class="card"><h3>ELECTRONICS</h3><p>Embedded systems, sensors, circuits, microcontrollers, motor control, hardware integration.</p></div>
+    <div class="card"><h3>MECHANICAL</h3><p>Robot design, fabrication, chassis, mechanisms, mechanical integration.</p></div>
+  </div>
+</section>
+
+<section id="domains" class="reveal">
+  <h2>CORE DOMAINS</h2>
+  <p class="sub">Interdisciplinary by design.</p>
+  <div class="grid" data-tilt>
+    <div class="card"><h3>🤖 ROBOTICS</h3><ul><li>Line Follower, RoboWar, RoboRace</li><li>RoboSumo, Robo Soccer</li><li>Autonomous robots, control systems</li></ul></div>
+    <div class="card"><h3>🧠 AI &amp; SOFTWARE</h3><ul><li>Machine Learning, Computer Vision</li><li>Navigation algorithms</li><li>Robot software</li></ul></div>
+    <div class="card"><h3>⚡ ELECTRONICS</h3><ul><li>Sensors, microcontrollers</li><li>Motors and drivers</li><li>Embedded systems</li></ul></div>
+    <div class="card"><h3>💻 PROGRAMMING</h3><ul><li>C, C++, Python, JavaScript</li><li>and other relevant technologies</li></ul></div>
+  </div>
+</section>
+
+<section id="journey" class="reveal">
+  <h2>FROM IDEA TO ROBOT</h2>
+  <p class="sub">Students design, build, program, test and improve through iteration.</p>
+  <div class="pipe" id="pipe"></div>
+</section>
+
+<section id="achievements" class="reveal">
+  <h2>HALL OF FAME · 2026</h2>
+  <p class="sub">Reported club achievements, shown as provided and editable in the data array in this file.</p>
+  <div class="grid" id="ach" data-tilt></div>
+  <p class="note">Status: reported by the organization; not independently verified.</p>
+</section>
+
+<section id="competitions" class="reveal">
+  <h2>COMPETITIONS &amp; EVENTS</h2>
+  <p class="sub">Robotics competitions, hackathons, workshops, training and inter-college events.</p>
+  <div class="grid" data-tilt>
+    <div class="card"><h3>IIT KANPUR</h3><p>Techkriti-related robotics activities.</p></div>
+    <div class="card"><h3>IIT BHU</h3><p>Technex robotics competitions.</p></div>
+    <div class="card"><h3>IIT BOMBAY</h3><p>Techfest activities and zonal events.</p></div>
+    <div class="card"><h3>HBTU</h3><p>Technika robotics competitions.</p></div>
+    <div class="card"><h3>CSJMU</h3><p>Robotics, technical competitions, innovation, training.</p></div>
+    <div class="card"><h3>AITH</h3><p>RoboWar and Line Follower events.</p></div>
+  </div>
+  <p class="note">A 2025 zonal event at CSJMU is reported to have had 450+ participants (organization-provided figure, unverified).</p>
+</section>
+
+<section id="training" class="reveal">
+  <h2>TRAIN • BUILD • COMPETE</h2>
+  <p class="sub">Beginner-friendly induction: robotics fundamentals, electronics, programming, sensors, microcontrollers, robot control, AI, computer vision, project development and competition preparation. Hackathons and innovation events extend this beyond robotics.</p>
+</section>
+
+<section id="projects" class="reveal">
+  <h2>PROJECTS</h2>
+  <p class="sub">Placeholder project data. Request access uses mock login and localStorage only.</p>
+  <div class="grid" id="proj" data-tilt></div>
+</section>
+
+<section id="team" class="reveal">
+  <h2>TEAM</h2>
+  <p class="sub">Placeholder cards. Add real members in the data array.</p>
+  <div class="grid" id="tm" data-tilt></div>
+</section>
+
+<section id="community" class="reveal">
+  <h2>OUR COMMUNITY</h2>
+  <p class="sub">ANcome VORTEX brings students from different technical fields together to build technology collaboratively: teamwork, peer learning, mentorship, project collaboration, technical discussions, competition preparation and innovation.</p>
+</section>
+
+<section id="next" class="reveal">
+  <h2>THE NEXT VORTEX</h2>
+  <p class="sub">The direction: AI-powered autonomous robotics, covering AI, autonomous navigation, computer vision, SLAM, 3D design, robot software, sensor fusion and embedded systems.</p>
+  <div class="card" style="max-width:520px"><h3>FINI</h3><p>Reported fully autonomous AI-powered robot project.</p>
+    <div class="tags" style="margin-top:10px"><span>AI</span><span>Autonomous Robotics</span><span>Navigation</span><span>Computer Vision</span><span>SLAM</span><span>3D Design</span></div>
+    <p class="note">Placeholders: description · team · images · demo · GitHub · documentation</p></div>
+</section>
+
+<footer>
+  <div class="mono"><b style="color:var(--ac)">ANcome VORTEX ROBOTICS</b><br>Robotics • AI • IoT • Coding • Innovation</div>
+  <div class="links"><a href="#about">About</a><a href="#projects">Projects</a><a href="#achievements">Achievements</a><a href="#team">Team</a><a href="#competitions">Events</a><a href="#">GitHub</a><a href="#">Contact</a></div>
+  <div class="mono" style="color:var(--ac2)">Learn. Build. Compete. Innovate.</div>
+  <div>A student-led Robotics &amp; Technology Community associated with CSJMU, Kanpur.</div>
+</footer>
+
+<dialog id="dlg"><h3 class="mono" id="dt" style="margin-top:0">REQUEST ACCESS</h3>
+  <textarea id="msg" rows="3" placeholder="Why do you want to join this project?"></textarea>
+  <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" id="cx">Cancel</button><button class="btn p" id="sb">Submit</button></div></dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+// ---- Editable data (replace with real info when verified) ----
+const ACHIEVEMENTS=[
+ {title:"Robo Race",position:"Winner",competition:"Technex 2026",institute:"IIT BHU",year:2026},
+ {title:"8 kg RoboWar",position:"Winner",competition:"Techkriti 2026",institute:"IIT Kanpur",year:2026},
+ {title:"Robo Sumo",position:"1st Place",competition:"Technika 2026",institute:"HBTU",year:2026},
+ {title:"Robo Race",position:"3rd Place",competition:"Technika 2026",institute:"HBTU",year:2026},
+ {title:"LFR",position:"1st Place",competition:"RoboRumble 3.0",institute:"CSJMU",year:2026},
+ {title:"RoboWar",position:"1st & 3rd Place",competition:"RoboRumble 3.0",institute:"CSJMU",year:2026},
+ {title:"Robo Soccer",position:"1st & 2nd Place",competition:"RoboRumble 3.0",institute:"CSJMU",year:2026},
+ {title:"RoboWar",position:"1st Place",competition:"",institute:"AITH",year:2026},
+ {title:"LFR",position:"1st Place",competition:"",institute:"AITH",year:2026}];
+const PROJECTS=[
+ {id:"p1",name:"Autonomous Rover",category:"Autonomous Systems",tech:["Placeholder"],admin:"TBD",status:"Placeholder",access:"Request"},
+ {id:"p2",name:"FINI",category:"AI",tech:["AI","SLAM","Computer Vision"],admin:"TBD",status:"Reported",access:"Request"},
+ {id:"p3",name:"Competition Bots",category:"Robotics",tech:["Placeholder"],admin:"TBD",status:"Placeholder",access:"Request"}];
+const TEAM=[1,2,3].map(i=>({name:"Member Name "+i,role:"Designation",dept:"Department",exp:"Expertise • Expertise",works:"Major works"}));
+const STEPS=["IDEA","DESIGN","ELECTRONICS","CODING","BUILD","TEST","COMPETE","INNOVATE"];
+
+// ---- Render ----
+const $=s=>document.querySelector(s);
+$("#ach").innerHTML=ACHIEVEMENTS.map(a=>`<div class="card trophy"><div class="t">🏆</div><h3>${a.title.toUpperCase()}</h3><div class="pos">${a.position}</div><p>${[a.competition,a.institute].filter(Boolean).join(" · ")}</p><span class="badge">reported · ${a.year}</span></div>`).join("");
+$("#proj").innerHTML=PROJECTS.map(p=>`<div class="card"><div class="ph">Project image</div><h3>${p.name}</h3><p>${p.category} · Admin: ${p.admin} · ${p.status}</p><div class="tags">${p.tech.map(t=>`<span>${t}</span>`).join("")}</div><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" disabled style="opacity:.5">View</button><button class="btn" data-req="${p.id}">Request Access</button></div><p class="note" data-st="${p.id}"></p></div>`).join("");
+$("#tm").innerHTML=TEAM.map(m=>`<div class="card"><div class="ph">Photo</div><h3>${m.name}</h3><p>${m.role} · ${m.dept}</p><p>${m.exp}</p><p>${m.works}</p><div class="tags" style="margin-top:8px"><span>GitHub</span><span>LinkedIn</span></div></div>`).join("");
+$("#pipe").innerHTML=STEPS.map((s,i)=>`<span class="step" style="--i:${i}">${s}</span>${i<STEPS.length-1?'<span style="color:var(--ac)">→</span>':''}`).join("");
+
+// ---- Mock auth + access requests (localStorage, guarded) ----
+const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
+let user=store.get("av_user",null),reqs=store.get("av_reqs",{}),cur=null;
+function paint(){$("#loginBtn").textContent=user?"Logout @"+user.githubUsername:"Continue with GitHub";
+ PROJECTS.forEach(p=>{const e=document.querySelector(`[data-st="${p.id}"]`);if(e)e.textContent=reqs[p.id]?"Request: "+reqs[p.id]:""})}
+function login(){const b=$("#loginBtn");b.textContent="Loading…";setTimeout(()=>{user={name:"Demo Student",githubUsername:"demo-student",role:"student"};store.set("av_user",user);paint()},600)}
+$("#loginBtn").onclick=()=>{if(user){user=null;store.set("av_user",null);paint()}else login()};
+$("#joinBtn").onclick=()=>{if(!user)login();location.hash="#training"};
+document.addEventListener("click",e=>{const id=e.target.dataset&&e.target.dataset.req;if(!id)return;if(!user){login();return}cur=id;$("#dlg").showModal()});
+$("#cx").onclick=()=>$("#dlg").close();
+$("#sb").onclick=()=>{reqs[cur]="pending";store.set("av_reqs",reqs);$("#msg").value="";$("#dlg").close();paint()};
+paint();
+
+// ---- Drawer, reveal, tilt ----
+$("#menu").onclick=()=>$("#drawer").classList.toggle("open");
+$("#drawer").onclick=()=>$("#drawer").classList.remove("open");
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");if(e.target.id==="journey")$("#pipe").classList.add("in")}}),{threshold:.15});
+document.querySelectorAll(".reveal").forEach(s=>io.observe(s));
+document.querySelectorAll("[data-tilt]").forEach(g=>g.addEventListener("mousemove",e=>{const c=e.target.closest(".card");if(!c)return;const r=c.getBoundingClientRect();c.style.transform=`perspective(600px) rotateY(${((e.clientX-r.left)/r.width-.5)*12}deg) rotateX(${-((e.clientY-r.top)/r.height-.5)*12}deg)`}));
+document.querySelectorAll("[data-tilt]").forEach(g=>g.addEventListener("mouseout",e=>{const c=e.target.closest(".card");if(c)c.style.transform=""}));
+
+// ---- 3D hero ----
+(function(){
+ if(typeof THREE==="undefined")return;
+ const cv=$("#c"),low=innerWidth<760||matchMedia("(prefers-reduced-motion:reduce)").matches;
+ const r=new THREE.WebGLRenderer({canvas:cv,alpha:true,antialias:!low});r.setPixelRatio(Math.min(devicePixelRatio,low?1:2));
+ const sc=new THREE.Scene(),cam=new THREE.PerspectiveCamera(55,1,.1,100);cam.position.z=7;
+ const mat=c=>new THREE.MeshBasicMaterial({color:c,wireframe:true,transparent:true,opacity:.55});
+ const core=new THREE.Mesh(new THREE.IcosahedronGeometry(1.8,low?1:2),mat(0x38e1ff));
+ const ring=new THREE.Mesh(new THREE.TorusGeometry(2.8,.02,8,low?48:96),mat(0x7affb2));ring.rotation.x=1.2;
+ const grp=new THREE.Group();grp.add(core,ring);grp.position.x=innerWidth>900?2.6:0;sc.add(grp);
+ const n=low?120:400,pos=new Float32Array(n*3);for(let i=0;i<n*3;i++)pos[i]=(Math.random()-.5)*20;
+ const pg=new THREE.BufferGeometry();pg.setAttribute("position",new THREE.BufferAttribute(pos,3));
+ const pts=new THREE.Points(pg,new THREE.PointsMaterial({color:0x38e1ff,size:.04}));sc.add(pts);
+ let mx=0,my=0,sy=0;addEventListener("mousemove",e=>{mx=e.clientX/innerWidth-.5;my=e.clientY/innerHeight-.5});addEventListener("scroll",()=>sy=scrollY);
+ function size(){const h=$("#hero");r.setSize(h.clientWidth,h.clientHeight,false);cam.aspect=h.clientWidth/h.clientHeight;cam.updateProjectionMatrix()}
+ addEventListener("resize",size);size();
+ let vis=true;new IntersectionObserver(e=>vis=e[0].isIntersecting).observe($("#hero"));
+ (function loop(t){requestAnimationFrame(loop);if(!vis)return;t*=.001;
+  core.rotation.y=t*.3+mx;core.rotation.x=t*.15+my;ring.rotation.z=t*.4;pts.rotation.y=t*.02;
+  grp.position.y=-sy*.004;cam.position.x+=(mx*1.2-cam.position.x)*.05;r.render(sc,cam)})(0);
+})();
+</script>
+</body>
+</html>
