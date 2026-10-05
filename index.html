@@ -188,14 +188,14 @@ const PROJECTS=[
  {id:"p1",name:"Autonomous Rover",img:"rover.jpg.jpeg",category:"Autonomous Systems",tech:["Placeholder"],admin:"TBD",status:"Placeholder",access:"Request"},
  {id:"p2",name:"FINI",img:"fini.jpg.jpeg",category:"AI",tech:["AI","SLAM","Computer Vision"],admin:"TBD",status:"Reported",access:"Request"},
  {id:"p3",name:"Competition Bots",img:"bots.jpg.jpeg",category:"Robotics",tech:["Placeholder"],admin:"TBD",status:"Placeholder",access:"Request"}];
-const TEAM=[1].map(i=>({name:"Priyam Mishra "+i,role:"senior member",dept:"CSE",exp:"Full stack MERN developer • SQL & MongoDB",works:"mentoring new members and ADMIN of this project",img:"priyam.jpg.jpeg"}));
+const TEAM=[1].map(i=>({name:"Priyam Mishra",role:"senior member",dept:"CSE",exp:"Full stack MERN developer • SQL & MongoDB",works:"mentoring new members and ADMIN of this project",img:"priyam.jpg.jpeg"}));
 const STEPS=["IDEA","DESIGN","ELECTRONICS","CODING","BUILD","TEST","COMPETE","INNOVATE"];
 
 // ---- Render ----
 const $=s=>document.querySelector(s);
 $("#ach").innerHTML=ACHIEVEMENTS.map(a=>`<div class="card trophy"><div class="t">🏆</div><h3>${a.title.toUpperCase()}</h3><div class="pos">${a.position}</div><p>${[a.competition,a.institute].filter(Boolean).join(" · ")}</p><span class="badge">reported · ${a.year}</span></div>`).join("");
 $("#proj").innerHTML=PROJECTS.map(p=>`<div class="card">${p.img?`<img src="${p.img}" alt="${p.name}" style="width:100%;height:110px;object-fit:cover;border-radius:8px;margin-bottom:12px">`:'<div class="ph">Project image</div>'}<h3>${p.name}</h3><p>${p.category} · Admin: ${p.admin} · ${p.status}</p><div class="tags">${p.tech.map(t=>`<span>${t}</span>`).join("")}</div><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" disabled style="opacity:.5">View</button><button class="btn" data-req="${p.id}">Request Access</button></div><p class="note" data-st="${p.id}"></p></div>`).join("");
-$("#tm").innerHTML=TEAM.map(m=>`<div class="card">${m.img?`<img src="${m.img}" alt="${m.name}" style="width:100%;height:160px;object-fit:cover;border-radius:8px;margin-bottom:12px">`:'<div class="ph">Photo</div>'}<h3>${m.name}</h3><p>${m.role} · ${m.dept}</p><p>${m.exp}</p><p>${m.works}</p><div class="tags" style="margin-top:8px"><span>GitHub</span><span>LinkedIn</span></div></div>`).join("");
+$("#tm").innerHTML=TEAM.map(m=>`<div class="card">${m.img?`<img src="${m.img}" alt="${m.name}" style="width:100%;height:auto;max-height:360px;object-fit:contain;background:#05080d;border-radius:8px;margin-bottom:12px">`:'<div class="ph">Photo</div>'}<h3>${m.name}</h3><p>${m.role} · ${m.dept}</p><p>${m.exp}</p><p>${m.works}</p><div class="tags" style="margin-top:8px"><span>GitHub</span><span>LinkedIn</span></div></div>`).join("");
 $("#pipe").innerHTML=STEPS.map((s,i)=>`<span class="step" style="--i:${i}">${s}</span>${i<STEPS.length-1?'<span style="color:var(--ac)">→</span>':''}`).join("");
 
 // ---- Mock auth + access requests (localStorage, guarded) ----
