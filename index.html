@@ -59,19 +59,25 @@ textarea{width:100%;background:#05080d;color:var(--tx);border:1px solid var(--li
 footer{border-top:1px solid var(--line);padding:40px 6vw;text-align:center;color:var(--mut);font-size:14px}
 footer .links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin:14px 0}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:8px 10px;border-bottom:1px solid var(--line);vertical-align:top}th{color:var(--ac);font-family:"Courier New",monospace}
+.st-pending{color:#ffc857}.st-approved{color:var(--ac2)}.st-rejected{color:#ff6b6b}
+.dash{padding:100px 6vw 60px;max-width:1100px;margin:auto}
+input{width:100%;background:#05080d;color:var(--tx);border:1px solid var(--line);border-radius:6px;padding:10px;font:inherit}
+.logo{height:34px;width:34px;border-radius:8px;object-fit:cover;vertical-align:middle;margin-right:8px}
+.cimg{width:100%;max-height:340px;object-fit:cover;border-radius:12px;border:1px solid var(--line);margin-bottom:24px}
 </style>
 </head>
 <body>
 <nav>
-  <a href="#hero" class="mono"><b>AN</b>come VORTEX</a>
+  <a href="#hero" class="mono"><img class="logo" src="logo.png" alt="" onerror="this.remove()"><b>AN</b>come VORTEX</a>
   <div class="links"><a href="#about">About</a><a href="#projects">Projects</a><a href="#achievements">Achievements</a><a href="#team">Team</a><a href="#community">Community</a></div>
-  <div style="display:flex;gap:8px;align-items:center"><button class="btn" id="loginBtn">Login</button><button id="menu" aria-label="Menu">☰</button></div>
+  <div style="display:flex;gap:8px;align-items:center"><a class="btn" id="dashBtn" hidden>Dashboard</a><button class="btn" id="loginBtn">Login</button><button id="menu" aria-label="Menu">☰</button></div>
 </nav>
 <aside id="drawer" aria-label="Menu">
   <a href="#about">About Us</a><a href="#domains">Domains</a><a href="#journey">Idea to Robot</a><a href="#projects">Projects</a><a href="#achievements">Achievements</a><a href="#competitions">Competitions</a><a href="#training">Training</a><a href="#team">Team</a><a href="#community">Community</a><a href="#next">The Next Vortex</a>
 </aside>
 
-<header id="hero">
+<main id="home"><header id="hero">
   <canvas id="c"></canvas>
   <div class="hc">
     <div class="tag mono">ROBOTICS • AI • IoT • CODING • INNOVATION</div>
@@ -90,6 +96,23 @@ footer .links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin
     <div class="card"><h3>ELECTRONICS</h3><p>Embedded systems, sensors, circuits, microcontrollers, motor control, hardware integration.</p></div>
     <div class="card"><h3>MECHANICAL</h3><p>Robot design, fabrication, chassis, mechanisms, mechanical integration.</p></div>
   </div>
+</section>
+
+<section id="glance" class="reveal">
+  <h2>CLUB AT A GLANCE</h2>
+  <img class="cimg" src="club.jpg" alt="ANcome VORTEX ROBOTICS" onerror="this.remove()">
+  <div class="grid" data-tilt>
+    <div class="card"><h3>WHO WE ARE</h3><p>A non-profit, student-led Robotics &amp; Technology Community associated with CSJMU, Kanpur. Field: Robotics Engineering &amp; Technology.</p></div>
+    <div class="card"><h3>LEARN</h3><p>Learn technology through practical projects and hands-on experimentation.</p></div>
+    <div class="card"><h3>BUILD</h3><p>Build real projects and work in teams across hardware, software and AI.</p></div>
+    <div class="card"><h3>COMPETE</h3><p>Robotics competitions, technical competitions and hackathons.</p></div>
+    <div class="card"><h3>INNOVATE</h3><p>Experiment with new technologies and solve real-world problems.</p></div>
+    <div class="card"><h3>HANDS-ON FIRST</h3><p>Hands-on learning, not only theory: design, build, program, test and improve robots through iteration.</p></div>
+  </div>
+  <h3 class="mono" style="margin-top:28px;color:var(--ac)">FOCUS AREAS</h3>
+  <div class="tags"><span>Robotics</span><span>AI</span><span>IoT</span><span>Coding</span><span>Electronics</span><span>Embedded Systems</span><span>Autonomous Robotics</span><span>Computer Vision</span><span>Software Development</span><span>Innovation</span></div>
+  <h3 class="mono" style="margin-top:28px;color:var(--ac)">WHAT NEW MEMBERS CAN LEARN</h3>
+  <div class="tags"><span>Robotics fundamentals</span><span>Electronics</span><span>Programming</span><span>Sensors</span><span>Microcontrollers</span><span>Robot control</span><span>AI</span><span>Computer Vision</span><span>Project development</span><span>Competition preparation</span></div>
 </section>
 
 <section id="domains" class="reveal">
@@ -143,7 +166,7 @@ footer .links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin
 
 <section id="team" class="reveal">
   <h2>TEAM</h2>
-  <p class="sub">Placeholder cards. Add real members in the data array.</p>
+  <p class="sub">The people behind ANcome VORTEX.</p>
   <div class="grid" id="tm" data-tilt></div>
 </section>
 
@@ -167,6 +190,12 @@ footer .links{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin
   <div>A student-led Robotics &amp; Technology Community associated with CSJMU, Kanpur.</div>
 </footer>
 
+</main><main id="dash" class="dash" hidden></main>
+<dialog id="ldlg"><h3 class="mono" style="margin-top:0">SIGN IN (DEMO)</h3>
+<input id="lem" type="email" placeholder="Email" autocomplete="off"><input id="lpw" type="password" placeholder="Password" autocomplete="off" style="margin-top:8px">
+<p id="lerr" class="note" style="color:#ff6b6b"></p>
+<p class="note">Demo only. Try student@vortex.demo / student123, admin@vortex.demo / admin123, super@vortex.demo / super123. Never enter a real password here.</p>
+<div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" id="lx">Cancel</button><button class="btn p" id="ls">Sign in</button></div></dialog>
 <dialog id="dlg"><h3 class="mono" id="dt" style="margin-top:0">REQUEST ACCESS</h3>
   <textarea id="msg" rows="3" placeholder="Why do you want to join this project?"></textarea>
   <div style="display:flex;gap:8px;justify-content:flex-end"><button class="btn" id="cx">Cancel</button><button class="btn p" id="sb">Submit</button></div></dialog>
@@ -185,10 +214,10 @@ const ACHIEVEMENTS=[
  {title:"RoboWar",position:"1st Place",competition:"",institute:"AITH",year:2026},
  {title:"LFR",position:"1st Place",competition:"",institute:"AITH",year:2026}];
 const PROJECTS=[
- {id:"p1",name:"Autonomous Rover",img:"rover.jpg.jpeg",category:"Autonomous Systems",tech:["Placeholder"],admin:"TBD",status:"Placeholder",access:"Request"},
- {id:"p2",name:"FINI",img:"fini.jpg.jpeg",category:"AI",tech:["AI","SLAM","Computer Vision"],admin:"TBD",status:"Reported",access:"Request"},
- {id:"p3",name:"Competition Bots",img:"bots.jpg.jpeg",category:"Robotics",tech:["Placeholder"],admin:"TBD",status:"Placeholder",access:"Request"}];
-const TEAM=[1].map(i=>({name:"Priyam Mishra",role:"senior member",dept:"CSE",exp:"Full stack MERN developer • SQL & MongoDB",works:"mentoring new members and ADMIN of this project",img:"priyam.jpg.jpeg"}));
+ {id:"p1",name:"Autonomous Rover",category:"Autonomous Systems",tech:["Placeholder"],admin:"TBD",status:"Placeholder",access:"Request"},
+ {id:"p2",name:"FINI",category:"AI",tech:["AI","SLAM","Computer Vision"],admin:"TBD",status:"Reported",access:"Request"},
+ {id:"p3",name:"Competition Bots",category:"Robotics",tech:["Placeholder"],admin:"TBD",status:"Placeholder",access:"Request"}];
+const TEAM=[{name:"Priyam Mishra",role:"senior member",dept:"CSE",exp:"Full stack MERN developer • SQL & MongoDB",works:"mentoring new members and ADMIN of this project",img:"priyam.jpg.jpeg"}];
 const STEPS=["IDEA","DESIGN","ELECTRONICS","CODING","BUILD","TEST","COMPETE","INNOVATE"];
 
 // ---- Render ----
@@ -198,18 +227,50 @@ $("#proj").innerHTML=PROJECTS.map(p=>`<div class="card">${p.img?`<img src="${p.i
 $("#tm").innerHTML=TEAM.map(m=>`<div class="card">${m.img?`<img src="${m.img}" alt="${m.name}" style="width:100%;height:auto;max-height:360px;object-fit:contain;background:#05080d;border-radius:8px;margin-bottom:12px">`:'<div class="ph">Photo</div>'}<h3>${m.name}</h3><p>${m.role} · ${m.dept}</p><p>${m.exp}</p><p>${m.works}</p><div class="tags" style="margin-top:8px"><span>GitHub</span><span>LinkedIn</span></div></div>`).join("");
 $("#pipe").innerHTML=STEPS.map((s,i)=>`<span class="step" style="--i:${i}">${s}</span>${i<STEPS.length-1?'<span style="color:var(--ac)">→</span>':''}`).join("");
 
-// ---- Mock auth + access requests (localStorage, guarded) ----
+// ---- Demo auth, roles, dashboards (localStorage). NOT real security. ----
 const store={get(k,d){try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},set(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}};
-let user=store.get("av_user",null),reqs=store.get("av_reqs",{}),cur=null;
-function paint(){$("#loginBtn").textContent=user?"Logout @"+user.githubUsername:"Continue with GitHub";
- PROJECTS.forEach(p=>{const e=document.querySelector(`[data-st="${p.id}"]`);if(e)e.textContent=reqs[p.id]?"Request: "+reqs[p.id]:""})}
-function login(){const b=$("#loginBtn");b.textContent="Loading…";setTimeout(()=>{user={name:"Demo Student",githubUsername:"demo-student",role:"student"};store.set("av_user",user);paint()},600)}
-$("#loginBtn").onclick=()=>{if(user){user=null;store.set("av_user",null);paint()}else login()};
-$("#joinBtn").onclick=()=>{if(!user)login();location.hash="#training"};
-document.addEventListener("click",e=>{const id=e.target.dataset&&e.target.dataset.req;if(!id)return;if(!user){login();return}cur=id;$("#dlg").showModal()});
+const ACCOUNTS=[
+ {email:"student@vortex.demo",pw:"student123",name:"Demo Student",githubUsername:"demo-student",role:"student"},
+ {email:"admin@vortex.demo",pw:"admin123",name:"Demo Admin",githubUsername:"demo-admin",role:"admin"},
+ {email:"super@vortex.demo",pw:"super123",name:"Demo Super Admin",githubUsername:"demo-super",role:"super-admin"}];
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+let user=store.get("av_user",null),reqs=store.get("av_reqs2",[]),cur=null;
+if(!Array.isArray(reqs))reqs=[];
+const save=()=>store.set("av_reqs2",reqs);
+const pname=id=>(PROJECTS.find(p=>p.id===id)||{name:id}).name;
+function paint(){$("#loginBtn").textContent=user?"Logout":"Continue with GitHub";const d=$("#dashBtn");d.hidden=!user;if(user)d.href="#/"+user.role;
+ PROJECTS.forEach(p=>{const e=document.querySelector(`[data-st="${p.id}"]`);if(!e)return;const r=user&&reqs.filter(x=>x.projectId===p.id&&x.email===user.email).pop();e.textContent=r?"Request: "+r.status:""})}
+$("#loginBtn").onclick=()=>{if(user){user=null;store.set("av_user",null);paint();location.hash="#hero";route()}else{$("#lerr").textContent="";$("#ldlg").showModal()}};
+$("#lx").onclick=()=>$("#ldlg").close();
+$("#ls").onclick=()=>{const em=$("#lem").value.trim().toLowerCase(),pw=$("#lpw").value,b=$("#ls");b.textContent="Checking...";
+ setTimeout(()=>{const a=ACCOUNTS.find(x=>x.email===em&&x.pw===pw);b.textContent="Sign in";
+  if(!a){$("#lerr").textContent="Wrong email or password.";return}
+  user={email:a.email,name:a.name,githubUsername:a.githubUsername,role:a.role};store.set("av_user",user);$("#lpw").value="";$("#ldlg").close();paint();location.hash="#/"+a.role;route()},500)};
+$("#joinBtn").onclick=()=>{location.hash="#training"};
+document.addEventListener("click",e=>{const t=e.target;if(!t.dataset)return;
+ if(t.dataset.req){if(!user){$("#lerr").textContent="Sign in to request access.";$("#ldlg").showModal();return}cur=t.dataset.req;$("#dlg").showModal();return}
+ if(t.dataset.a){const r=reqs.find(x=>x.id==t.dataset.id);if(r){r.status=t.dataset.a;save();route();paint()}}});
 $("#cx").onclick=()=>$("#dlg").close();
-$("#sb").onclick=()=>{reqs[cur]="pending";store.set("av_reqs",reqs);$("#msg").value="";$("#dlg").close();paint()};
-paint();
+$("#sb").onclick=()=>{reqs.push({id:Date.now(),email:user.email,name:user.name,github:user.githubUsername,projectId:cur,message:$("#msg").value.trim(),status:"pending",createdAt:new Date().toLocaleString()});save();$("#msg").value="";$("#dlg").close();paint()};
+const tbl=(h,rows)=>rows.length?`<div style="overflow-x:auto"><table><tr>${h.map(x=>`<th>${x}</th>`).join("")}</tr>${rows.join("")}</table></div>`:'<p class="note">Nothing here yet.</p>';
+const stat=(n,l)=>`<div class="card"><h3>${n}</h3><p>${l}</p></div>`;
+const H=t=>`<h3 class="mono" style="margin-top:28px">${t}</h3>`;
+const reqRow=(r,act)=>`<tr><td>${esc(r.name)}<br><span class="note">@${esc(r.github)}</span></td><td>${esc(pname(r.projectId))}</td><td>${esc(r.message)||"-"}</td><td class="st-${r.status}">${r.status}</td><td>${act&&r.status==="pending"?`<button class="btn" data-a="approved" data-id="${r.id}">Approve</button> <button class="btn" data-a="rejected" data-id="${r.id}">Reject</button>`:esc(r.createdAt)}</td></tr>`;
+const REQH=["User","Project","Reason","Status","Action / Date"];
+const views={
+ student:()=>{const m=reqs.filter(r=>r.email===user.email),ap=m.filter(r=>r.status==="approved");
+  return `<h2>STUDENT DASHBOARD</h2><div class="grid">${stat("@"+esc(user.githubUsername),esc(user.name)+" · "+esc(user.email))}${stat(m.length,"Requested projects")}${stat(m.filter(r=>r.status==="pending").length,"Pending")}${stat(ap.length,"Approved")}</div>${H("My projects")}${tbl(["Project"],ap.map(r=>`<tr><td>${esc(pname(r.projectId))}</td></tr>`))}${H("My requests")}${tbl(["Project","Status","Sent"],m.map(r=>`<tr><td>${esc(pname(r.projectId))}</td><td class="st-${r.status}">${r.status}</td><td>${esc(r.createdAt)}</td></tr>`))}${H("Notifications")}${m.filter(r=>r.status!=="pending").map(r=>`<p class="note">Your request for ${esc(pname(r.projectId))} was ${r.status}.</p>`).join("")||'<p class="note">No notifications.</p>'}`},
+ admin:()=>`<h2>PROJECT ADMIN DASHBOARD</h2><div class="grid">${stat(PROJECTS.length,"Managed projects")}${stat(reqs.filter(r=>r.status==="pending").length,"Pending requests")}${stat(reqs.filter(r=>r.status==="approved").length,"Members approved")}</div>${H("Managed projects")}${tbl(["Project","Category","Status"],PROJECTS.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.category)}</td><td>${esc(p.status)}</td></tr>`))}${H("Access requests")}${tbl(REQH,reqs.map(r=>reqRow(r,true)))}`,
+ "super-admin":()=>`<h2>SUPER ADMIN DASHBOARD</h2><div class="grid">${stat(ACCOUNTS.filter(a=>a.role==="student").length,"Students (demo)")}${stat(ACCOUNTS.filter(a=>a.role==="admin").length,"Admins (demo)")}${stat(PROJECTS.length,"Projects")}${stat(reqs.length,"All requests")}</div>${H("All projects")}${tbl(["Project","Category","Status"],PROJECTS.map(p=>`<tr><td>${esc(p.name)}</td><td>${esc(p.category)}</td><td>${esc(p.status)}</td></tr>`))}${H("All requests")}${tbl(REQH,reqs.map(r=>reqRow(r,true)))}${H("Accounts (demo)")}${tbl(["Name","Email","Role"],ACCOUNTS.map(a=>`<tr><td>${esc(a.name)}</td><td>${esc(a.email)}</td><td>${a.role}</td></tr>`))}${H("System settings")}<p class="note">Placeholder. Real settings need a backend.</p>`};
+function route(){const h=location.hash,m=h.match(/^#\/(student|admin|super-admin)$/),home=$("#home"),dash=$("#dash");
+ if(!m){const was=home.hidden;dash.hidden=true;home.hidden=false;if(was){dispatchEvent(new Event("resize"));try{const t=h.length>1&&document.querySelector(h);if(t)t.scrollIntoView()}catch(e){}}return}
+ if(!user){location.hash="#hero";$("#lerr").textContent="Please sign in first.";$("#ldlg").showModal();return}
+ if(user.role!==m[1]){location.hash="#/"+user.role;return}
+ home.hidden=true;dash.hidden=false;
+ dash.innerHTML=views[m[1]]()+`<div class="cta"><a class="btn" href="#hero">Back to site</a><button class="btn" id="lo">Logout</button></div><p class="note">Prototype: demo accounts and requests live only in this browser. This is not real security; real login and approvals need a backend.</p>`;
+ $("#lo").onclick=()=>$("#loginBtn").click();scrollTo(0,0)}
+addEventListener("hashchange",route);
+paint();route();
 
 // ---- Drawer, reveal, tilt ----
 $("#menu").onclick=()=>$("#drawer").classList.toggle("open");
