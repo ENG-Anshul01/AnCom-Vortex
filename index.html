@@ -63,11 +63,29 @@ table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;p
 .st-pending{color:#ffc857}.st-approved{color:var(--ac2)}.st-rejected{color:#ff6b6b}
 .dash{padding:100px 6vw 60px;max-width:1100px;margin:auto}
 input{width:100%;background:#05080d;color:var(--tx);border:1px solid var(--line);border-radius:6px;padding:10px;font:inherit}
-.logo{height:34px;width:34px;border-radius:8px;object-fit:cover;vertical-align:middle;margin-right:8px}
+.logo{height:44px;width:auto;max-width:90px;border-radius:8px;object-fit:contain;vertical-align:middle;margin-right:10px}
 .cimg{width:100%;max-height:340px;object-fit:cover;border-radius:12px;border:1px solid var(--line);margin-bottom:24px}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2));z-index:60}
+.caret{animation:blink 1s steps(1) infinite;color:var(--ac)}
+@keyframes blink{50%{opacity:0}}
+.hc h1 span{animation:glow 3s ease-in-out infinite}
+@keyframes glow{50%{text-shadow:0 0 22px var(--ac)}}
+.reveal.in .grid>.card{animation:up .6s backwards;animation-delay:calc(var(--n,0)*80ms)}
+@keyframes up{from{opacity:0;transform:translateY(24px)}}
+.trophy .t{display:inline-block;animation:flt 3s ease-in-out infinite}
+@keyframes flt{50%{transform:translateY(-5px)}}
+#land{position:fixed;inset:0;z-index:50;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:24px;background:radial-gradient(circle at 50% 40%,#0b2230,#05080d 70%);transition:opacity .7s,transform .7s}
+#land.gone{opacity:0;transform:scale(1.08);pointer-events:none}
+#land img{height:110px;width:auto;max-width:80vw;object-fit:contain}
+#land h1{font-size:clamp(28px,7vw,60px);margin:0}
+body.lock{overflow:hidden}
+.soc{border:1px solid var(--line);padding:6px 14px;border-radius:99px}.soc:hover{border-color:var(--ac);color:var(--ac)}
+.sa{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap;margin-top:16px}.sa>img,.sa>.ph{width:160px;height:auto;max-height:200px;object-fit:contain;border-radius:8px;flex:none}.sa ul{margin:4px 0 0}
 </style>
 </head>
 <body>
+<div id="bar"></div>
+<div id="land"><img src="logo.png" alt="" onerror="this.remove()"><div class="tag mono">ROBOTICS &bull; AI &bull; IoT &bull; CODING &bull; INNOVATION</div><h1><span style="color:var(--ac)">AN</span>come VORTEX ROBOTICS</h1><p class="mono" style="color:var(--ac2);margin:0">Learn. Build. Compete. Innovate.</p><p style="color:var(--mut);max-width:520px;margin:0">A student-led technology community at CSJMU, Kanpur.</p><button class="btn p" id="enter">ENTER VORTEX</button></div>
 <nav>
   <a href="#hero" class="mono"><img class="logo" src="logo.png" alt="" onerror="this.remove()"><b>AN</b>come VORTEX</a>
   <div class="links"><a href="#about">About</a><a href="#projects">Projects</a><a href="#achievements">Achievements</a><a href="#team">Team</a><a href="#community">Community</a></div>
@@ -82,7 +100,7 @@ input{width:100%;background:#05080d;color:var(--tx);border:1px solid var(--line)
   <div class="hc">
     <div class="tag mono">ROBOTICS • AI • IoT • CODING • INNOVATION</div>
     <h1>ANcome <span>VORTEX</span> ROBOTICS</h1>
-    <p class="mono" style="color:var(--ac2)">Learn. Build. Compete. Innovate.</p>
+    <p class="mono" style="color:var(--ac2)"><span id="tw">Learn. Build. Compete. Innovate.</span><span class="caret">|</span></p>
     <p style="color:var(--mut)">A student-led technology community building real-world robotics and technology projects at CSJMU, Kanpur.</p>
     <div class="cta"><a class="btn p" href="#projects">Explore Projects</a><button class="btn" id="joinBtn">Join VORTEX</button><a class="btn" href="#team">Meet Our Team</a></div>
   </div>
@@ -109,11 +127,14 @@ input{width:100%;background:#05080d;color:var(--tx);border:1px solid var(--line)
     <div class="card"><h3>INNOVATE</h3><p>Experiment with new technologies and solve real-world problems.</p></div>
     <div class="card"><h3>HANDS-ON FIRST</h3><p>Hands-on learning, not only theory: design, build, program, test and improve robots through iteration.</p></div>
   </div>
+  <div class="grid" id="more" data-tilt style="margin-top:16px"></div>
   <h3 class="mono" style="margin-top:28px;color:var(--ac)">FOCUS AREAS</h3>
   <div class="tags"><span>Robotics</span><span>AI</span><span>IoT</span><span>Coding</span><span>Electronics</span><span>Embedded Systems</span><span>Autonomous Robotics</span><span>Computer Vision</span><span>Software Development</span><span>Innovation</span></div>
   <h3 class="mono" style="margin-top:28px;color:var(--ac)">WHAT NEW MEMBERS CAN LEARN</h3>
   <div class="tags"><span>Robotics fundamentals</span><span>Electronics</span><span>Programming</span><span>Sensors</span><span>Microcontrollers</span><span>Robot control</span><span>AI</span><span>Computer Vision</span><span>Project development</span><span>Competition preparation</span></div>
 </section>
+
+<section id="gallery" class="reveal" hidden><h2>GALLERY</h2><div class="grid" id="gal"></div></section>
 
 <section id="domains" class="reveal">
   <h2>CORE DOMAINS</h2>
@@ -168,12 +189,15 @@ input{width:100%;background:#05080d;color:var(--tx);border:1px solid var(--line)
   <h2>TEAM</h2>
   <p class="sub">The people behind ANcome VORTEX.</p>
   <div class="grid" id="tm" data-tilt></div>
+  <h3 class="mono" style="margin-top:28px;color:var(--ac)">SUPER ADMIN</h3><div id="sa"></div>
 </section>
 
 <section id="community" class="reveal">
   <h2>OUR COMMUNITY</h2>
   <p class="sub">ANcome VORTEX brings students from different technical fields together to build technology collaboratively: teamwork, peer learning, mentorship, project collaboration, technical discussions, competition preparation and innovation.</p>
 </section>
+
+<section id="future" class="reveal"><h2>FUTURE PLANNING</h2><p class="sub">Where ANcome VORTEX is heading. Details will be added as plans are confirmed.</p><div class="grid" id="fut" data-tilt></div></section>
 
 <section id="next" class="reveal">
   <h2>THE NEXT VORTEX</h2>
@@ -186,6 +210,7 @@ input{width:100%;background:#05080d;color:var(--tx);border:1px solid var(--line)
 <footer>
   <div class="mono"><b style="color:var(--ac)">ANcome VORTEX ROBOTICS</b><br>Robotics • AI • IoT • Coding • Innovation</div>
   <div class="links"><a href="#about">About</a><a href="#projects">Projects</a><a href="#achievements">Achievements</a><a href="#team">Team</a><a href="#competitions">Events</a><a href="#">GitHub</a><a href="#">Contact</a></div>
+  <div class="links" id="soc"></div>
   <div class="mono" style="color:var(--ac2)">Learn. Build. Compete. Innovate.</div>
   <div>A student-led Robotics &amp; Technology Community associated with CSJMU, Kanpur.</div>
 </footer>
@@ -203,6 +228,14 @@ input{width:100%;background:#05080d;color:var(--tx);border:1px solid var(--line)
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 // ---- Editable data (replace with real info when verified) ----
+const LINKS={instagram:"",linkedin:"",github:"",whatsapp:"",email:""}; // paste full links between the quotes; empty ones stay hidden
+const MORE=[]; // extra club info cards, example: {t:"VISION",x:"your text"},
+const GALLERY=[]; // club photos, example: "gallery1.jpg.jpeg",
+const SUPER={name:"Super Admin",role:"Super Admin",img:"",resp:["Overall oversight of the platform","Managing project admins and projects"],powers:["View all students, admins, projects, members and requests","Manage admins, students and projects","Control system settings"]};
+const FUTURE=[
+ {t:"AI-powered autonomous robotics",x:"Moving toward AI, autonomous navigation, computer vision, SLAM and sensor fusion."},
+ {t:"FINI",x:"A reported fully autonomous AI-powered robot project. Details to be added."},
+ {t:"Training & hackathons",x:"Student training and induction programs, and encouraging participation in hackathons and technology competitions beyond robotics."}];
 const ACHIEVEMENTS=[
  {title:"Robo Race",position:"Winner",competition:"Technex 2026",institute:"IIT BHU",year:2026},
  {title:"8 kg RoboWar",position:"Winner",competition:"Techkriti 2026",institute:"IIT Kanpur",year:2026},
@@ -223,7 +256,7 @@ const STEPS=["IDEA","DESIGN","ELECTRONICS","CODING","BUILD","TEST","COMPETE","IN
 // ---- Render ----
 const $=s=>document.querySelector(s);
 $("#ach").innerHTML=ACHIEVEMENTS.map(a=>`<div class="card trophy"><div class="t">🏆</div><h3>${a.title.toUpperCase()}</h3><div class="pos">${a.position}</div><p>${[a.competition,a.institute].filter(Boolean).join(" · ")}</p><span class="badge">reported · ${a.year}</span></div>`).join("");
-$("#proj").innerHTML=PROJECTS.map(p=>`<div class="card">${p.img?`<img src="${p.img}" alt="${p.name}" style="width:100%;height:110px;object-fit:cover;border-radius:8px;margin-bottom:12px">`:'<div class="ph">Project image</div>'}<h3>${p.name}</h3><p>${p.category} · Admin: ${p.admin} · ${p.status}</p><div class="tags">${p.tech.map(t=>`<span>${t}</span>`).join("")}</div><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" disabled style="opacity:.5">View</button><button class="btn" data-req="${p.id}">Request Access</button></div><p class="note" data-st="${p.id}"></p></div>`).join("");
+$("#proj").innerHTML=PROJECTS.map(p=>`<div class="card">${p.img?`<img src="${p.img}" alt="${p.name}" style="width:100%;height:auto;max-height:260px;object-fit:contain;background:#05080d;border-radius:8px;margin-bottom:12px">`:'<div class="ph">Project image</div>'}<h3>${p.name}</h3><p>${p.category} · Admin: ${p.admin} · ${p.status}</p><div class="tags">${p.tech.map(t=>`<span>${t}</span>`).join("")}</div><div style="display:flex;gap:8px;margin-top:12px"><button class="btn" disabled style="opacity:.5">View</button><button class="btn" data-req="${p.id}">Request Access</button></div><p class="note" data-st="${p.id}"></p></div>`).join("");
 $("#tm").innerHTML=TEAM.map(m=>`<div class="card">${m.img?`<img src="${m.img}" alt="${m.name}" style="width:100%;height:auto;max-height:360px;object-fit:contain;background:#05080d;border-radius:8px;margin-bottom:12px">`:'<div class="ph">Photo</div>'}<h3>${m.name}</h3><p>${m.role} · ${m.dept}</p><p>${m.exp}</p><p>${m.works}</p><div class="tags" style="margin-top:8px"><span>GitHub</span><span>LinkedIn</span></div></div>`).join("");
 $("#pipe").innerHTML=STEPS.map((s,i)=>`<span class="step" style="--i:${i}">${s}</span>${i<STEPS.length-1?'<span style="color:var(--ac)">→</span>':''}`).join("");
 
@@ -279,6 +312,25 @@ const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.targ
 document.querySelectorAll(".reveal").forEach(s=>io.observe(s));
 document.querySelectorAll("[data-tilt]").forEach(g=>g.addEventListener("mousemove",e=>{const c=e.target.closest(".card");if(!c)return;const r=c.getBoundingClientRect();c.style.transform=`perspective(600px) rotateY(${((e.clientX-r.left)/r.width-.5)*12}deg) rotateX(${-((e.clientY-r.top)/r.height-.5)*12}deg)`}));
 document.querySelectorAll("[data-tilt]").forEach(g=>g.addEventListener("mouseout",e=>{const c=e.target.closest(".card");if(c)c.style.transform=""}));
+
+// ---- Extra sections + animations ----
+(function(){
+ const ico={instagram:"Instagram",linkedin:"LinkedIn",github:"GitHub",whatsapp:"WhatsApp",email:"Email"};
+ const soc=Object.keys(ico).filter(k=>LINKS[k]).map(k=>`<a class="soc" target="_blank" rel="noopener" href="${k==="email"?"mailto:"+LINKS[k]:LINKS[k]}">${ico[k]}</a>`).join("");
+ $("#soc").innerHTML=soc||'<span class="note">Social links coming soon</span>';
+ $("#more").innerHTML=MORE.map(m=>`<div class="card"><h3>${m.t}</h3><p>${m.x}</p></div>`).join("");
+ if(GALLERY.length){$("#gallery").hidden=false;$("#gal").innerHTML=GALLERY.map(g=>`<img src="${g}" alt="Club photo" onerror="this.remove()" style="width:100%;border-radius:12px;border:1px solid var(--line);object-fit:contain;background:#05080d">`).join("")}
+ $("#fut").innerHTML=FUTURE.map((f,i)=>`<div class="card"><h3>0${i+1} · ${f.t}</h3><p>${f.x}</p></div>`).join("");
+ $("#sa").innerHTML=`<div class="card sa">${SUPER.img?`<img src="${SUPER.img}" alt="${SUPER.name}">`:'<div class="ph">Photo</div>'}<div><h3>${SUPER.name} · ${SUPER.role}</h3><p>Responsibilities</p><ul>${SUPER.resp.map(x=>`<li>${x}</li>`).join("")}</ul><p style="margin-top:8px">Powers</p><ul>${SUPER.powers.map(x=>`<li>${x}</li>`).join("")}</ul></div></div>`;
+ document.querySelectorAll(".grid").forEach(g=>[...g.children].forEach((c,i)=>c.style.setProperty("--n",i)));
+ addEventListener("scroll",()=>{const h=document.documentElement;$("#bar").style.width=(scrollY/(h.scrollHeight-innerHeight)*100)+"%"});
+ const P=["Learn.","Build.","Compete.","Innovate.","Learn. Build. Compete. Innovate."],e=$("#tw");
+ if(!matchMedia("(prefers-reduced-motion:reduce)").matches){let i=0,j=0,d=0;(function t(){const w=P[i];j+=d?-1:1;e.textContent=w.slice(0,j);let ms=d?40:90;if(!d&&j===w.length){d=1;ms=1100}else if(d&&j===0){d=0;i=(i+1)%P.length;ms=300}setTimeout(t,ms)})()}
+ const L=$("#land");let seen=false;try{seen=sessionStorage.getItem("av_in")}catch(x){}
+ if(seen||location.hash.startsWith("#/")){L.remove();return}
+ document.body.classList.add("lock");
+ $("#enter").onclick=()=>{L.classList.add("gone");document.body.classList.remove("lock");try{sessionStorage.setItem("av_in","1")}catch(x){}setTimeout(()=>L.remove(),700)};
+})();
 
 // ---- 3D hero ----
 (function(){
